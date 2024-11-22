@@ -1,5 +1,5 @@
 import math
-from typing import List
+from typing import List, Dict, Tuple, Optional
 
 
 class MagicSquare:
@@ -11,12 +11,12 @@ class MagicSquare:
             raise ValueError("Размер магического квадарата должен быть нечётным числом >=3")
         return True
 
-    def _create_zero_square(self) -> List[list[None]]:
+    def _create_empty_square(self) -> List[List[Optional[int]]]:
         return [[None for _ in range(self._shape)] for _ in range(self._shape)]
 
-    def create_magic_square(self) -> List[list]:
+    def create_magic_square(self) -> List[List[int]]:
         assert self._is_valid_shape()
-        magic_square: List[list] = self._create_zero_square()
+        magic_square: List[List[Optional[int]]] = self._create_empty_square()
         x, y = 0, self._shape // 2
         for num in range(1, self._shape ** 2 + 1):
             magic_square[x][y] = num
@@ -28,35 +28,64 @@ class MagicSquare:
         return magic_square
 
 
+def get_shape(text: str) -> int:
+    text = text.replace(' ', '')
+    length = len(text)
+    if length % math.sqrt(length):
+        shape = int(math.sqrt(length) + 1)
+    else:
+        shape = int(math.sqrt(length))
+    return shape if shape >= 3 else shape + 1
+
+
 class MagicEncryption:
     @staticmethod
-    def _get_shape(text: str) -> int:
-        text = text.replace(' ', '')
-        length = len(text)
-        if length % math.sqrt(length):
-            shape = int(math.sqrt(length) + 1)
-        else:
-            shape = int(math.sqrt(length))
-        return shape if shape >= 3 else shape + 1
+    def create_magic_square(text: str) -> List[List[Optional[int]]]:
+        shape = get_shape(text=text)
+        magic_square = MagicSquare(shape=shape)
+        return magic_square.create_magic_square()
 
     @classmethod
     def encrypt(cls, text: str) -> str:
-        shape = cls._get_shape(text=text)
-        magic_square = MagicSquare(shape=shape).create_magic_square()
+        magic_square = cls.create_magic_square(text=text)
         chars = list(text)
-        positions = {}
-        for i in range(len(magic_square)):
-            for j in range(len(magic_square[i])):
+        positions: Dict[int, Tuple[int, int]] = {}
+        for i, row in enumerate(magic_square):
+            for j, item in enumerate(magic_square[i]):
                 positions[magic_square[i][j]] = (i, j)
         for index, char in enumerate(chars):
             if index + 1 in positions:
                 row, col = positions[index + 1]
                 magic_square[row][col] = char
-        return magic_square
+        encrypted_text = ''.join([
+            ' ' if isinstance(item, int) else item
+            for row in magic_square
+            for item in row
+        ])
+        return encrypted_text
 
     @classmethod
     def decrypt(cls, text: str) -> str:
-        ...
+        magic_square = cls.create_magic_square(text=text)
+        decrypted_chars: List[Optional[str]] = [None for _ in range(len(text))]
+        positions: List[int] = []
+        for i, row in enumerate(magic_square):
+            for j, item in enumerate(magic_square[i]):
+                positions.append(magic_square[i][j])
+        for index, char in enumerate(text):
+            decrypted_chars[positions[index] - 1] = char
+        decrypted_text = ''.join(decrypted_chars)
+        return decrypted_text
 
 
-print(MagicEncryption.encrypt(text='Магическая сила'))
+def main() -> None:
+    text = input("Введите текст: ")
+    magic_encryption = MagicEncryption()
+    encrypted = magic_encryption.encrypt(text=text)
+    print(f"Зашифрованный текст: {encrypted}")
+    decrypted = magic_encryption.decrypt(text=encrypted)
+    print(f"Разшифрованный текст: {decrypted}")
+
+
+if __name__ == "__main__":
+    main()
