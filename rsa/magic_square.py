@@ -25,17 +25,22 @@ class MagicSquare:
                 x = (x + 1) % self._shape
             else:
                 x, y = new_x, new_y
+        for row in magic_square:
+            print(row)
         return magic_square
 
 
 def get_shape(text: str) -> int:
     text = text.replace(' ', '')
     length = len(text)
-    if length % math.sqrt(length):
-        shape = int(math.sqrt(length) + 1)
+    if length < 9:
+        return 3
+    sqrt_length = math.isqrt(length)
+    if length % sqrt_length != 0 or sqrt_length % 2 == 0:
+        shape = sqrt_length + 1 if sqrt_length % 2 == 0 else sqrt_length + 2
     else:
-        shape = int(math.sqrt(length))
-    return shape if shape >= 3 else shape + 1
+        shape = sqrt_length
+    return shape
 
 
 class MagicEncryption:

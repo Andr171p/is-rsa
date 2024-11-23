@@ -1,30 +1,28 @@
-def create_magic_square(n):
-    """ Функция для создания магического квадрата размера n x n, где n должно быть нечетным числом. """
-    if n % 2 != 1 or n < 3:
-        raise ValueError("Размер магического квадрата должен быть нечетным числом >= 3")
+def generate_magic_square(n):
+    if n % 2 == 0:
+        raise ValueError("Нечетный порядок не поддерживается")
 
     magic_square = [[0 for _ in range(n)] for _ in range(n)]
 
-    # Начальная позиция
-    row, col = 0, n // 2
+    i, j = 0, n // 2
 
-    for num in range(1, n**2 + 1):
-        magic_square[row][col] = num
+    for num in range(1, n ** 2 + 1):
+        magic_square[i][j] = num
 
-        new_row = (row - 1) % n
-        new_col = (col + 1) % n
+        next_i, next_j = (i - 1) % n, (j + 1) % n
 
-        if magic_square[new_row][new_col]:
-            row = (row + 1) % n
+        # Если следующая клетка занята, переходим вниз
+        if magic_square[next_i][next_j]:
+            i += 1
         else:
-            row, col = new_row, new_col
+            i, j = next_i, next_j
 
     return magic_square
 
-# Пример использования
-if __name__ == "__main__":
-    n = 3  # Размер магического квадрата
-    square = create_magic_square(n)
 
-    for row in square:
-        print(row)
+# Пример использования
+n = 3
+magic_square = generate_magic_square(n)
+
+for row in magic_square:
+    print(' '.join(map(str, row)))
