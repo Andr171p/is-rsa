@@ -1,28 +1,51 @@
-def generate_magic_square(n):
-    if n % 2 == 0:
-        raise ValueError("Нечетный порядок не поддерживается")
-
-    magic_square = [[0 for _ in range(n)] for _ in range(n)]
-
-    i, j = 0, n // 2
-
-    for num in range(1, n ** 2 + 1):
-        magic_square[i][j] = num
-
-        next_i, next_j = (i - 1) % n, (j + 1) % n
-
-        # Если следующая клетка занята, переходим вниз
-        if magic_square[next_i][next_j]:
-            i += 1
-        else:
-            i, j = next_i, next_j
-
-    return magic_square
+from typing import List, Optional
 
 
-# Пример использования
-n = 3
-magic_square = generate_magic_square(n)
+class MagicSquare:
+    def __init__(self, shape: int) -> None:
+        self.shape = shape
+        self._square: List[List[Optional[int]]] = [
+            [None for _ in range(self.shape)]
+            for _ in range(self.shape)
+        ]
 
-for row in magic_square:
-    print(' '.join(map(str, row)))
+    def calculate_sums(self):
+        ...
+
+    def __repr__(self) -> str:
+        rows = []
+        for row in self._square:
+            rows.append(f"{row}\n")
+        return "".join(rows)
+
+
+def calculate_row_sum(matrix: List[List[int]], index: int = 0) -> int:
+    return sum(matrix[index])
+
+
+def calculate_column_sum(matrix: List[List[int]], index: int = 0) -> int:
+    return sum([row[index] for row in matrix])
+
+
+def calculate_main_diag_sum(matrix: List[List[int]]) -> int:
+    return sum([matrix[index][index] for index in range(len(matrix))])
+
+
+def calculate_side_diag_sum(matrix: List[List[int]]) -> int:
+    shape = len(matrix)
+    summ = 0
+    for num in range(shape):
+        summ += matrix[0 + num][shape - num]
+        print(f"index: {summ}")
+    return summ
+
+
+m = [
+    [1, 2, 7],
+    [2, 4, 3],
+    [9, 5, 8]
+]
+print(calculate_row_sum(m, index=0))
+print(calculate_column_sum(m, index=1))
+print(calculate_main_diag_sum(m))
+print(calculate_side_diag_sum(m))

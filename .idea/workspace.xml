@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="606fdf1e-db64-45c9-a442-2e7b2b777b39" name="Changes" comment="is-rsa magic-square">
+    <list default="true" id="606fdf1e-db64-45c9-a442-2e7b2b777b39" name="Changes" comment="is-rsa magic-square 1.0">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rsa/magic_square.py" beforeDir="false" afterPath="$PROJECT_DIR$/rsa/magic_square.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,16 +32,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.magic_square.executor": "Run",
-    "Python.main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/andre/FastapiRegIS"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.magic_square.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/andre/FastapiRegIS&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Python.magic_square">
+}</component>
+  <component name="RunManager" selected="Python.main">
     <configuration name="magic_square" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="IS" />
       <option name="ENV_FILES" value="" />
@@ -89,8 +88,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.magic_square" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.magic_square" />
       </list>
     </recent_temporary>
   </component>
@@ -126,12 +125,21 @@
       <option name="project" value="LOCAL" />
       <updated>1732308849001</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="is-rsa magic-square 1.0">
+      <option name="closed" value="true" />
+      <created>1732342833219</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1732342833219</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="is-rsa" />
     <MESSAGE value="is-rsa magic-square" />
-    <option name="LAST_COMMIT_MESSAGE" value="is-rsa magic-square" />
+    <MESSAGE value="is-rsa magic-square 1.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="is-rsa magic-square 1.0" />
   </component>
 </project>
