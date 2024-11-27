@@ -47,6 +47,7 @@ class MagicEncryption:
     @staticmethod
     def create_magic_square(text: str) -> List[List[Optional[int]]]:
         shape = get_shape(text=text)
+        print(shape)
         magic_square = MagicSquare(shape=shape)
         return magic_square.create_magic_square()
 
