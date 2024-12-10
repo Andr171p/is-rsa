@@ -2,7 +2,7 @@ import math
 from typing import List, Dict, Tuple, Optional
 
 
-class MagicSquare:
+class OddMagicSquare:
     def __init__(self, shape: int) -> None:
         self._shape = shape
 
