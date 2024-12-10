@@ -1,51 +1,33 @@
-from typing import List, Optional
+n = int(input())
 
+# Создаем массив
+matrix = [0] * (n * n + 1)
 
-class MagicSquare:
-    def __init__(self, shape: int) -> None:
-        self.shape = shape
-        self._square: List[List[Optional[int]]] = [
-            [None for _ in range(self.shape)]
-            for _ in range(self.shape)
-        ]
+# Генерируем магический квадрат
+half_n = n // 2
+mark = 1
+middle = n // 2
+upper = n * n + 1
+half = n * n // 2
 
-    def calculate_sums(self):
-        ...
+# Ставим метки в первой половине массива
+for k in range(1, half_n + 1):
+    for j in range(1, half_n + 1):
+        matrix[middle - j + 1] = mark
+        matrix[middle + j] = mark
+        mark = -mark
 
-    def __repr__(self) -> str:
-        rows = []
-        for row in self._square:
-            rows.append(f"{row}\n")
-        return "".join(rows)
+    # Переходим к следующей строке
+    middle += n
+    mark = -mark
 
+# Расставляем числа
+for i in range(1, half + 1):
+    # Будущая координата числа i
+    l = i
+    if matrix[i] < 0:
+        l = upper - i
 
-def calculate_row_sum(matrix: List[List[int]], index: int = 0) -> int:
-    return sum(matrix[index])
-
-
-def calculate_column_sum(matrix: List[List[int]], index: int = 0) -> int:
-    return sum([row[index] for row in matrix])
-
-
-def calculate_main_diag_sum(matrix: List[List[int]]) -> int:
-    return sum([matrix[index][index] for index in range(len(matrix))])
-
-
-def calculate_side_diag_sum(matrix: List[List[int]]) -> int:
-    shape = len(matrix)
-    summ = 0
-    for num in range(shape):
-        summ += matrix[0 + num][shape - num]
-        print(f"index: {summ}")
-    return summ
-
-
-m = [
-    [1, 2, 7],
-    [2, 4, 3],
-    [9, 5, 8]
-]
-print(calculate_row_sum(m, index=0))
-print(calculate_column_sum(m, index=1))
-print(calculate_main_diag_sum(m))
-print(calculate_side_diag_sum(m))
+    matrix[l] = i
+    matrix[upper - l] = upper - i
+print(matrix)
